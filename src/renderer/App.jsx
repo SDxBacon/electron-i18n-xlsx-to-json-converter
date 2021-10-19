@@ -1,33 +1,35 @@
 import React from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
+import StateText from './components/StateText';
+import SaveFileButton from './components/SaveFileButton';
 import SelectFileButton from './components/SelectFileButton';
+import LoadingIndicator from './components/LoadingIndicator';
+import IpcRendererProvider from './components/IpcRendererProvider';
 import icon from '../../assets/icon.svg';
 import './App.global.css';
 
-const Hello = () => {
+const HomePage = () => {
   return (
-    <div>
-      <div className="Hello">
-        <img width="200px" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <SelectFileButton />
+    <IpcRendererProvider>
+      <div>
+        <div className="Hello">
+          <img width="200px" alt="icon" src={icon} />
+        </div>
 
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
+        {/* 狀態文字 */}
+        <StateText />
+
+        <div className="Hello">
+          {/* 「選擇 xlsx 檔案」按鈕 */}
+          <SelectFileButton />
+          {/*  */}
+          <SaveFileButton />
+        </div>
+
+        {/* 全域 Loading Indicator */}
+        <LoadingIndicator />
       </div>
-    </div>
+    </IpcRendererProvider>
   );
 };
 
@@ -35,7 +37,7 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Hello} />
+        <Route path="/" component={HomePage} />
       </Switch>
     </Router>
   );
