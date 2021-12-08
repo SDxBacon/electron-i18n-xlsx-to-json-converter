@@ -27,7 +27,13 @@ const parseExcel2JSON = (filePath) => {
     each(data, (row) => {
       const { key } = row;
       each(languageCodes, (code) => {
-        setWith(output, `[${code}][${sheetName}][${key}]`, row[code], Object);
+        const splited = row[code].split(/\r?\n/);
+        setWith(
+          output,
+          `[${code}][${sheetName}][${key}]`,
+          splited.length > 1 ? splited : row[code],
+          Object
+        );
       });
     });
   });
