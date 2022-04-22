@@ -27,11 +27,14 @@ const parseExcel2JSON = (filePath) => {
     each(data, (row) => {
       const { key } = row;
       each(languageCodes, (code) => {
-        const splited = row[code].split(/\r?\n/);
+        const strCellVal = String(row[code]); // cell value as string type
+        const splitted = strCellVal.split(/\r?\n/);
         setWith(
           output,
           `[${code}][${sheetName}][${key}]`,
-          splited.length > 1 ? splited : row[code],
+          splitted.length > 1
+            ? splitted //
+            : row[code], // TODO: 可能需要採用 strCellVal !?
           Object
         );
       });
