@@ -1,3 +1,8 @@
+# 1.0.3
+
+- Fix parsing error when excel contains empty sheet
+- Window title will show version information
+
 # 1.0.2
 
 - Fix parsing error if cell value is `Number`
